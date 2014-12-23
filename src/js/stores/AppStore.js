@@ -43,6 +43,7 @@ AppStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_DATA:
       loadItemData(action.data);
+      AppStore.emitChange();
       break;
 
     case ActionTypes.CLICK_BUTTON:
