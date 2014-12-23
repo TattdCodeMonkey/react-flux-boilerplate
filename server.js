@@ -16,6 +16,11 @@ server.route({
     }
 });
 
+server.register({register: require('./lib/items')}, function(err){
+  if(err)
+    console.error('Failed to load items plugin: ', err);
+});
+
 server.register({
   register: Good,
   options: {

@@ -34,6 +34,7 @@
     "good": "^5.1.0",
     "good-console": "^3.1.2",
     "hapi": "^8.0.0",
+    "joi": "^5.0.2",
     "keymirror": "^0.1.0",
     "object-assign": "^2.0.0",
     "react": "^0.12.1"
