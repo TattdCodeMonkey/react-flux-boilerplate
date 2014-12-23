@@ -26,7 +26,8 @@ gulp.task('vendorjs', function () {
           'src/vendor/lodash.underscore.js',
           'src/vendor/backbone.js',
           'src/vendor/accounting.js',
-          'src/vendor/faker.js'
+          'src/vendor/faker.js',
+          'src/vendor/jquery.min.js'
         ])
         .pipe(uglify())
         .pipe(concat('vendor.js'))
