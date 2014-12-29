@@ -1,21 +1,23 @@
+var ItemServerActions = require('../actions/ItemServerActionCreators');
+
 module.exports = {
 
-  getData: function(callback){
+  getData: function(){
     $.get('/api/items')
       .done(function(data){
-        callback({success: true, data: data});
+          ItemServerActions.receiveData(data);
       })
       .fail(function() {
-        callback({error: true, success: false});
+        console.error('error retreiving data from the server');
       });
   },
-  addItem: function(item, callback){    
+  addItem: function(item){
     $.post('/api/items/new/'+item)
       .done(function(data){
-       callback({success: true, data: data});
+        ItemServerActions.itemAdded(data);
       })
       .fail(function() {
-        callback({error: true, success: false});
+        console.error('server error adding item');
       });
   }
 };

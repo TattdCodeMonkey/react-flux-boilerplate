@@ -4,26 +4,10 @@ var React = require('react');
 var ItemActions = require('../actions/ItemActionCreators');
 var ReactPropTypes = React.PropTypes;
 
-function formatItem(item){
+function itemStyle(item){
   if(item.done)
-    return formatDoneItem(item);
-  return formatUncompleteItem(item);
-}
-
-function formatDoneItem(item){
-  return (
-      <li onClick={this._onClickItem} style="text-decoration: line-through;">
-      {item.text}
-      </li>
-  );
-}
-
-function formatUncompleteItem(item){
-  return (
-      <li onClick={this._onClickItem}>
-      {item.text}
-      </li>
-  );
+    return "text-decoration: line-through;";
+  return "";
 }
 
 var Item = React.createClass({
@@ -33,8 +17,12 @@ var Item = React.createClass({
   
   render: function(){
     var item = this.props.item;
+    if(item.done)
+      return (
+          <li onClick={this._onClickItem}>-{item.text}- <span>X</span></li>
+      );
     return (
-        <li>{item.text}</li>
+        <li onClick={this._onClickItem}>{item.text}</li>
     );
   },
 

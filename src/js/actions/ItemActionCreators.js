@@ -13,27 +13,11 @@ module.exports = {
     });
   }, 
   getData: function(){
-    var self = this;
-    DataAPI.getData(function(response){
-      if(response.success){
-        self.receiveData(response.data);
-      }
-      else{ 
-        console.error('error getting data from the server');
-      }
-    });
+    DataAPI.getData();
   },
   createItem: function(itemText) {
     var self = this;
-    DataAPI.addItem(itemText, function(response){
-      if(response.success)
-        ItemDispatcher.handleServerAction({
-          type: ActionTypes.UPDATE_ITEM,
-          data: response.data
-        });
-      else
-        console.error('error adding item to list on server');
-    });
+    DataAPI.addItem(itemText);
   },
   toggleDone: function(item){
     var self = this;
