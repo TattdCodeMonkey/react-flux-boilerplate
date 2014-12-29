@@ -1,42 +1,18 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActionCreators');
-
-function getItems() {
-  return { items: AppStore.getAll() };
-}
+var ItemList = require('./ItemList.react');
+var ItemComposer = require('./ItemComposer.react');
 
 var App = React.createClass({
-  getInitialState: function() {
-    return getItems();
-  },
-  componentWillMount: function() {
-    AppStore.addChangeListener(this._onChange);
-  },
-
-  _onChange: function() {
-    this.setState(getItems());
-  },
-
-  handleClick: function() {
-    AppActions.clickButton('one');
-  },
-
   render: function() {
-    var items = this.state.items.map(function(item) {
-      return <li>{item}</li>
-    });
     return (
       <div>
-        <b>HI ho </b>
+        <h2>Rodneys contrived React List app</h2>
         <br />
-        <button onClick={this.handleClick}>Click Me</button>
+        <ItemComposer />
         <br />
-        <ul>
-          {items}
-        </ul>
+        <ItemList /> 
       </div>
     );
   }

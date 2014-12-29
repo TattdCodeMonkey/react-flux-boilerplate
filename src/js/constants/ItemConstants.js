@@ -3,7 +3,7 @@ var keyMirror = require('keymirror');
 module.exports = {
 
   ActionTypes: keyMirror({
-    CLICK_BUTTON: null,
+    CREATE_ITEM: null,
     RECEIVE_DATA: null,
   }),
 

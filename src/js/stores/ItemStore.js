@@ -1,9 +1,9 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
+var ItemDispatcher = require('../dispatcher/ItemDispatcher');
+var ItemConstants = require('../constants/ItemConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var ActionTypes = AppConstants.ActionTypes;
+var ActionTypes = ItemConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _items = [];
@@ -12,11 +12,7 @@ function loadItemData(data) {
   _items = data;
 }
 
-function addItem(item) {
-  _items.push(item);
-}
-
-var AppStore = assign({}, EventEmitter.prototype, {
+var ItemStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -36,20 +32,14 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 });
 
-AppStore.dispatchToken = AppDispatcher.register(function(payload) {
+ItemStore.dispatchToken = ItemDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
 
     case ActionTypes.RECEIVE_DATA:
       loadItemData(action.data);
-      AppStore.emitChange();
-      break;
-
-    case ActionTypes.CLICK_BUTTON:
-      console.log('store action: ', action);
-      addItem(action.buttonID);
-      AppStore.emitChange();
+      ItemStore.emitChange();
       break;
 
     default:
@@ -58,4 +48,4 @@ AppStore.dispatchToken = AppDispatcher.register(function(payload) {
 
 });
 
-module.exports = AppStore;
+module.exports = ItemStore;

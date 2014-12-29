@@ -1,20 +1,21 @@
-var AppActions = require('../actions/AppActionCreators');
-
-var API_URL = '/items';
-var TIMEOUT = 10000;
-
 module.exports = {
 
-  getData: function(){
-//    var data = JSON.parse(localStorage.getItem('items'));
-//    AppActions.receiveData(data);
-      $.get('/items', function(data, status){
-        console.log("Status: ", status);
-        console.log("Data: ", data);
-        if(status == 'success')
-          AppActions.receiveData(data);     
-//      else
-//        console.error(data);
+  getData: function(callback){
+    $.get('/api/items')
+      .done(function(data){
+        callback({success: true, data: data});
+      })
+      .fail(function() {
+        callback({error: true, success: false});
       });
-  }, 
+  },
+  addItem: function(item, callback){    
+    $.post('/api/items/new/'+item)
+      .done(function(data){
+       callback({success: true, data: data});
+      })
+      .fail(function() {
+        callback({error: true, success: false});
+      });
+  }
 };
