@@ -12,6 +12,8 @@ function getStateFromStores(){
 }
 
 function getListItem(item){
+  if(item === null)
+    return;
   return(
     <Item key={item.id} item={item} />
   );

@@ -27,9 +27,20 @@ module.exports = {
     var self = this;
     DataAPI.addItem(itemText, function(response){
       if(response.success)
-        self.receiveData(response.data);
+        ItemDispatcher.handleServerAction({
+          type: ActionTypes.UPDATE_ITEM,
+          data: response.data
+        });
       else
         console.error('error adding item to list on server');
+    });
+  },
+  toggleDone: function(item){
+    var self = this;
+    item.done = !item.done;
+    ItemDispatcher.handleServerAction({
+      type: ActionTypes.UPDATE_ITEM,
+      data: item
     });
   }
 

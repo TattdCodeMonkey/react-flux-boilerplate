@@ -12,6 +12,14 @@ function loadItemData(data) {
   _items = data;
 }
 
+function updateDataItem(item) {
+  _items[item.id] = item;
+}
+
+function removeItem(item) {
+  _items[item.id] = null;
+}
+
 var ItemStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
@@ -41,7 +49,13 @@ ItemStore.dispatchToken = ItemDispatcher.register(function(payload) {
       loadItemData(action.data);
       ItemStore.emitChange();
       break;
-
+    case ActionTypes.UPDATE_ITEM:
+      updateDataItem(action.data);
+      ItemStore.emitChange();
+      break;
+    case ActionTypes.REMOVE_ITEM:
+      removeItem(action.data);
+      break;
     default:
       // do nothing
   }

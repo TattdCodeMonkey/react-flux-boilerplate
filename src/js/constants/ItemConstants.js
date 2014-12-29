@@ -3,8 +3,9 @@ var keyMirror = require('keymirror');
 module.exports = {
 
   ActionTypes: keyMirror({
-    CREATE_ITEM: null,
-    RECEIVE_DATA: null,
+    UPDATE_ITEM: null,
+    REMOVE_ITEM: null,
+    RECEIVE_DATA: null
   }),
 
   PayloadSources: keyMirror({
